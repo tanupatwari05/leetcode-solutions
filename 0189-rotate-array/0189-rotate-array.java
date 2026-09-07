@@ -1,31 +1,28 @@
+
 class Solution {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
-
         k = k % n;
 
-        // Reverse the entire array
-        reverse(nums, 0, n - 1);
+        int[] temp = new int[k];
 
-        // Reverse the first k elements
-        reverse(nums, 0, k - 1);
+        // Store last k elements
+        for (int i = 0; i < k; i++) {
+            temp[i] = nums[n - k + i];
+        }
 
-        // Reverse the remaining elements
-        reverse(nums, k, n - 1);
-    }
+        // Shift remaining elements
+        for (int i = n - k - 1; i >= 0; i--) {
+            nums[i + k] = nums[i];
+        }
 
-    private void reverse(int[] nums, int left, int right) {
-        while (left < right) {
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-
-            left++;
-            right--;
+        // Put temp elements at the beginning
+        for (int i = 0; i < k; i++) {
+            nums[i] = temp[i];
         }
     }
 }
-    
+       
 
 // Synced seamlessly with LeetHub Pro
 // Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
